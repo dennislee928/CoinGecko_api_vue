@@ -1,11 +1,7 @@
 {
-  "extends": "./tsconfig.app.json",
-  "exclude": [],
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
   "compilerOptions": {
-    "composite": true,
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.vitest.tsbuildinfo",
-
-    "lib": [],
-    "types": ["node", "jsdom"]
-  }
+    "types": ["jsdom"]
+  },
+  "include": ["tests/**/*.ts", "src/**/*.ts"] // 新增 "src/**/*.ts"
 }
