@@ -79,8 +79,8 @@ export default defineComponent({
 }
 
 .coin-table th {
-  background-color: #f4f4f4;
-  color: #333; /* 改變文字顏色 */
+  background-color: #007bff; /* 深色背景 */
+  color: #fff; /* 白色文字 */
 }
 
 .coin-table tr:nth-child(even) {
@@ -115,11 +115,6 @@ export default defineComponent({
     height: 80px;
   }
 
-  .whitepaper-thumbnail {
-    width: 40px;
-    height: 40px;
-  }
-
   .coin-table th,
   .coin-table td {
     display: block;
@@ -128,8 +123,8 @@ export default defineComponent({
   }
 
   .coin-table th {
-    background-color: #f4f4f4;
-    font-weight: bold;
+    background-color: #007bff; /* 深色背景 */
+    color: #fff; /* 白色文字 */
   }
 
   .coin-table td {
