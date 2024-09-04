@@ -5,11 +5,13 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   data() {
     return {
-      marketData: null
+      marketData: null as any
     }
   },
   created() {
@@ -19,5 +21,5 @@ export default {
         this.marketData = data
       })
   }
-}
+})
 </script>
