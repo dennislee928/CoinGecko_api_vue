@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <ul>
-      <li v-for="coin in coins" :key="coin.id">
+  <div class="container">
+    <ul class="coin-list">
+      <li v-for="coin in coins" :key="coin.id" class="coin-item">
         <router-link :to="{ name: 'CoinDetail', params: { id: coin.id } }">
           {{ coin.name }}
         </router-link>
@@ -47,3 +47,41 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.container {
+  padding: 20px;
+}
+
+.coin-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.coin-item {
+  margin: 10px 0;
+}
+
+.coin-item a {
+  text-decoration: none;
+  color: #42b983;
+}
+
+.coin-item a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+  .coin-item {
+    margin: 5px 0;
+  }
+
+  .coin-item a {
+    font-size: 14px;
+  }
+}
+</style>
