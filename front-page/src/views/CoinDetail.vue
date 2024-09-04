@@ -139,8 +139,8 @@ export default defineComponent({
 }
 
 .coin-table {
-  width: 100%;
-  max-width: 800px;
+  width: 75%;
+  max-width: 700px;
   border-collapse: collapse;
   margin: 20px 0;
   font-size: 18px;
