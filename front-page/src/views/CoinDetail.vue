@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <div class="container">
     <h1>{{ coinData.name }} ({{ coinData.symbol }})</h1>
     <img :src="coinData.logo" alt="Logo" class="coin-logo" />
@@ -99,6 +100,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Navbar from '../components/Navbar.vue'
 
 export default defineComponent({
   props: {

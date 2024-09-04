@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <div class="container">
     <h1>Market Overview</h1>
     <router-link to="/coins">

@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <div class="container">
     <h1>CoinList</h1>
     <div v-if="loading" class="loading-spinner">
