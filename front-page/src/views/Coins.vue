@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Navbar />
+    <NavbarItem />
     <ul class="coin-list">
       <li v-for="coin in coins" :key="coin.id" class="coin-item">
         <router-link :to="{ name: 'CoinDetail', params: { id: coin.id } }">

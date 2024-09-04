@@ -1,5 +1,5 @@
 <template>
-  <Navbar />
+  <NavbarItem />
   <div class="container">
     <h1>{{ coinData.name }} ({{ coinData.symbol }})</h1>
     <img :src="coinData.logo" alt="Logo" class="coin-logo" />

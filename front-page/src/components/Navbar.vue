@@ -1,70 +1,77 @@
 <template>
-  <nav>
-    <div class="navbar">
-      <div class="navbar-toggle" @click="toggleNavbar">
-        <span class="icon">&#9776;</span>
-        <!-- 可愛的漢堡圖標 -->
-      </div>
-      <ul v-if="isNavbarOpen"></ul>
-      <ul>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <router-link to="/" class="navbar-logo">Crypto App</router-link>
+      <ul class="navbar-menu">
         <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/coins">Coins</router-link></li>
-        <!-- 其他導航鏈接 -->
+        <!-- 其他導航項目 -->
       </ul>
     </div>
   </nav>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'AppNavbar',
-  setup() {
-    const isNavbarOpen = ref(false)
-    const toggleNavbar = () => {
-      isNavbarOpen.value = !isNavbarOpen.value
-    }
-    return { isNavbarOpen, toggleNavbar }
-  }
+  name: 'NavbarItem'
 })
 </script>
 
 <style scoped>
 .navbar {
-  background-color: #333;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between; /* 調整為兩端對齊 */
-  align-items: center; /* 水平置中 */
-  text-align: center; /* 新增這行以確保內容水平置中 */
+  width: 100%; /* 確保導航欄寬度為 100% */
+  background-color: #4caf50; /* 深色背景 */
+  color: white; /* 白色文字 */
 }
 
-.navbar-toggle {
-  cursor: pointer;
-  color: white;
+.navbar-container {
+  display: flex;
+  justify-content: space-between; /* 使項目兩端對齊 */
+  align-items: center;
+  padding: 10px 20px; /* 調整內邊距 */
+}
+
+.navbar-logo {
   font-size: 24px;
-}
-
-.navbar ul {
-  list-style-type: none;
-  margin: 10;
-  padding: 0;
-  display: flex;
-  flex-direction: row; /* 水平排列 */
-}
-
-.navbar li {
-  display: block;
-}
-
-.navbar a {
   color: white;
   text-decoration: none;
-  padding: 10px 20px;
 }
 
-.navbar a:hover {
-  background-color: #555;
+.navbar-menu {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-menu li {
+  margin-left: 20px; /* 項目之間的間距 */
+}
+
+.navbar-menu a {
+  color: white; /* 白色文字 */
+  text-decoration: none;
+}
+
+.navbar-menu a:hover {
+  text-decoration: underline; /* 懸停時的下劃線 */
+}
+
+@media (max-width: 600px) {
+  .navbar-container {
+    flex-direction: column; /* 在小屏幕上垂直排列 */
+    align-items: flex-start; /* 左對齊 */
+  }
+
+  .navbar-menu {
+    flex-direction: column; /* 將導航項目垂直排列 */
+    width: 100%; /* 確保導航項目寬度為 100% */
+  }
+
+  .navbar-menu li {
+    margin: 5px 0; /* 項目之間的間距 */
+  }
 }
 </style>
