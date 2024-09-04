@@ -1,57 +1,45 @@
 <template>
-  <Navbar />
-  <div class="container">
-    <h1>CoinList</h1>
+  <div class="coins-container">
     <div v-if="loading" class="loading-spinner">
       <div class="spinner"></div>
     </div>
-    <ul v-else class="coin-list">
-      <li v-for="coin in coins" :key="coin.id">
-        <router-link :to="`/coins/${coin.id}`">{{ coin.name }}</router-link>
-      </li>
-    </ul>
+    <div v-else class="coin" v-for="coin in coins" :key="coin.id">
+      {{ coin.name }}
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-
-interface Coin {
-  id: string
-  name: string
-}
+import { defineComponent, computed, onMounted } from 'vue'
+import { useCoinStore } from '../stores/coinStore'
 
 export default defineComponent({
   name: 'CoinList',
-  data() {
+  setup() {
+    const coinStore = useCoinStore()
+    const coins = computed(() => coinStore.coins)
+    const loading = computed(() => coinStore.loading)
+
+    onMounted(() => {
+      coinStore.fetchCoins()
+    })
+
     return {
-      coins: [] as Coin[],
-      loading: true
-    }
-  },
-  async created() {
-    try {
-      const response = await fetch('https://api.coinpaprika.com/v1/coins')
-      if (!response.ok) {
-        throw new Error('Network response was not ok')
-      }
-      const data = await response.json()
-      this.coins = data
-    } catch (error) {
-      console.error('There was a problem with the fetch operation:', error)
-    } finally {
-      this.loading = false
+      coins,
+      loading
     }
   }
 })
 </script>
 
 <style scoped>
-.container {
+.coins-container {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .loading-spinner {
@@ -79,38 +67,12 @@ export default defineComponent({
   }
 }
 
-.coin-list {
-  list-style-type: none;
-  padding: 0;
-  width: 100%;
-  max-width: 600px;
-}
-
-.coin-list li {
-  margin: 10px 0;
-  text-align: center;
-}
-
-router-link {
-  text-decoration: none;
-  color: #3498db;
-}
-
-router-link:hover {
-  text-decoration: underline;
-}
-
-@media (max-width: 600px) {
-  .container {
-    padding: 10px;
-  }
-
-  .coin-list {
-    font-size: 14px;
-  }
-
-  .coin-list li {
-    margin: 5px 0;
-  }
+.coin {
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  /* 其他樣式 */
 }
 </style>
