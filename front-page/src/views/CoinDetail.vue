@@ -5,18 +5,95 @@
     <img :src="coinData.logo" alt="Logo" class="coin-logo" />
     <p>{{ coinData.description }}</p>
     <table class="coin-table">
-      <thead>
-        <tr>
-          <th>Attribute</th>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(value, key) in coinData" :key="key">
-          <td>{{ key }}</td>
-          <td>{{ value }}</td>
-        </tr>
-      </tbody>
+      <tr>
+        <th>ID</th>
+        <td>{{ coinData.id }}</td>
+      </tr>
+      <tr>
+        <th>Rank</th>
+        <td>{{ coinData.rank }}</td>
+      </tr>
+      <tr>
+        <th>Type</th>
+        <td>{{ coinData.type }}</td>
+      </tr>
+      <tr>
+        <th>Is New</th>
+        <td>{{ coinData.is_new }}</td>
+      </tr>
+      <tr>
+        <th>Is Active</th>
+        <td>{{ coinData.is_active }}</td>
+      </tr>
+      <tr>
+        <th>Started At</th>
+        <td>{{ new Date(coinData.started_at).toLocaleString() }}</td>
+      </tr>
+      <tr>
+        <th>Development Status</th>
+        <td>{{ coinData.development_status }}</td>
+      </tr>
+      <tr>
+        <th>Hardware Wallet</th>
+        <td>{{ coinData.hardware_wallet }}</td>
+      </tr>
+      <tr>
+        <th>Proof Type</th>
+        <td>{{ coinData.proof_type }}</td>
+      </tr>
+      <tr>
+        <th>Org Structure</th>
+        <td>{{ coinData.org_structure }}</td>
+      </tr>
+      <tr>
+        <th>Hash Algorithm</th>
+        <td>{{ coinData.hash_algorithm }}</td>
+      </tr>
+      <tr>
+        <th>Tags</th>
+        <td>
+          <ul>
+            <li v-for="tag in coinData.tags" :key="tag.id">{{ tag.name }}</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>Team</th>
+        <td>
+          <ul>
+            <li v-for="member in coinData.team" :key="member.id">
+              {{ member.name }} - {{ member.position }}
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>Links</th>
+        <td>
+          <ul>
+            <li v-for="(link, type) in coinData.links" :key="type">
+              <strong>{{ type }}:</strong>
+              <ul>
+                <li v-for="url in link" :key="url">
+                  <a :href="url" target="_blank">{{ url }}</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>Whitepaper</th>
+        <td>
+          <a :href="coinData.whitepaper.link" target="_blank">
+            <img
+              :src="coinData.whitepaper.thumbnail"
+              alt="Whitepaper Thumbnail"
+              class="whitepaper-thumbnail"
+            />
+          </a>
+        </td>
+      </tr>
     </table>
   </div>
 </template>
@@ -53,7 +130,6 @@ export default defineComponent({
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  color: #333; /* 改變文字顏色 */
 }
 
 .coin-logo {
@@ -69,7 +145,7 @@ export default defineComponent({
   margin: 20px 0;
   font-size: 18px;
   text-align: left;
-  background-color: #fff; /* 改變背景顏色 */
+  color: #333; /* 確保文字顏色清晰 */
 }
 
 .coin-table th,
@@ -79,8 +155,8 @@ export default defineComponent({
 }
 
 .coin-table th {
-  background-color: #007bff; /* 深色背景 */
-  color: #fff; /* 白色文字 */
+  background-color: #f4f4f4;
+  color: #000; /* 確保標題文字顏色清晰 */
 }
 
 .coin-table tr:nth-child(even) {
@@ -102,12 +178,13 @@ export default defineComponent({
   }
 
   .coin-table {
-    font-size: 14px;
+    font-size: 16px; /* 調整字體大小 */
   }
 
   .coin-table th,
   .coin-table td {
-    padding: 8px 10px;
+    padding: 10px; /* 調整內邊距 */
+    word-wrap: break-word;
   }
 
   .coin-logo {
@@ -115,29 +192,9 @@ export default defineComponent({
     height: 80px;
   }
 
-  .coin-table th,
-  .coin-table td {
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .coin-table th {
-    background-color: #007bff; /* 深色背景 */
-    color: #fff; /* 白色文字 */
-  }
-
-  .coin-table td {
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    padding-left: 0;
-  }
-
-  .coin-table tr {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
+  .whitepaper-thumbnail {
+    width: 40px;
+    height: 40px;
   }
 }
 </style>
