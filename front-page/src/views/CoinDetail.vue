@@ -1,24 +1,25 @@
 <template>
   <div>
-    <h1>{{ coin.name }}</h1>
-    <pre>{{ coin }}</pre>
+    <h1>Coin Detail</h1>
+    <pre>{{ coinData }}</pre>
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
   data() {
     return {
-      coin: null
+      coinData: null as any
     }
   },
   created() {
-    const coinId = this.$route.params.id
-    fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)
+    fetch('https://api.coinpaprika.com/v1/coins/btc-bitcoin')
       .then((response) => response.json())
       .then((data) => {
-        this.coin = data
+        this.coinData = data
       })
   }
-}
+})
 </script>

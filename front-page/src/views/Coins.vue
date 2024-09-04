@@ -9,12 +9,19 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+interface Coin {
+  id: string
+  name: string
+}
+
+export default defineComponent({
   name: 'CoinList',
   data() {
     return {
-      coins: []
+      coins: [] as Coin[]
     }
   },
   async created() {
@@ -29,5 +36,5 @@ export default {
       console.error('There was a problem with the fetch operation:', error)
     }
   }
-}
+})
 </script>
