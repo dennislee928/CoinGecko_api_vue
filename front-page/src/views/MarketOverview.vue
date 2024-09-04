@@ -106,7 +106,7 @@ export default defineComponent({
 
 .market-table th,
 .market-table td {
-  padding: 12px 15px;
+  padding: 20px 15px; /* 增加內邊距以增加行間距 */
   border: 1px solid #ddd;
 }
 
@@ -149,6 +149,10 @@ export default defineComponent({
   .market-table tr {
     margin-bottom: 20px; /* 增加行間距 */
     margin-top: 20px;
+  }
+
+  .market-table tr {
+    padding: 10px 0; /* 增加行的上下內邊距 */
   }
 }
 </style>

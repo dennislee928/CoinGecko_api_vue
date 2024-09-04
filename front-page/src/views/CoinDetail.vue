@@ -140,8 +140,8 @@ export default defineComponent({
 }
 
 .coin-table {
-  width: 75%;
-  max-width: 700px;
+  width: 75vw; /* 設置為設備螢幕寬度的 75% */
+  max-width: 700px; /* 可選，根據需要調整 */
   border-collapse: collapse;
   margin: 20px 0;
   font-size: 18px;
