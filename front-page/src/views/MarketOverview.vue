@@ -96,6 +96,7 @@ export default defineComponent({
   margin: 20px 0;
   font-size: 18px;
   text-align: left;
+  color: #333; /* 確保文字顏色清晰 */
 }
 
 .market-table th,
@@ -105,25 +106,43 @@ export default defineComponent({
 }
 
 .market-table th {
-  background-color: #f4f4f4;
+  background-color: #4caf50; /* 深色背景 */
+  color: #fff; /* 白色文字 */
 }
 
 .market-table tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: #f2f2f2; /* 淺色背景 */
 }
 
 .market-table tr:hover {
-  background-color: #f1f1f1;
+  background-color: #ddd; /* 懸停時的背景顏色 */
 }
 
 @media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
   .market-table {
-    font-size: 14px;
+    font-size: 16px; /* 調整字體大小 */
   }
 
   .market-table th,
   .market-table td {
-    padding: 8px 10px;
+    padding: 10px; /* 調整內邊距 */
+    word-wrap: break-word; /* 允許文字換行 */
+    color: #333; /* 確保文字顏色清晰 */
+  }
+
+  .market-table th,
+  .market-table td {
+    display: block; /* 使表格在小屏幕上垂直顯示 */
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .market-table tr {
+    margin-bottom: 10px; /* 增加行間距 */
   }
 }
 </style>
