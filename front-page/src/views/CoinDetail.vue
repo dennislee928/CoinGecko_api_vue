@@ -1,6 +1,6 @@
 <template>
-  <Navbar />
   <div class="container">
+    <Navbar />
     <h1>{{ coinData.name }} ({{ coinData.symbol }})</h1>
     <img :src="coinData.logo" alt="Logo" class="coin-logo" />
     <p>{{ coinData.description }}</p>
@@ -145,6 +145,7 @@ export default defineComponent({
   margin: 20px 0;
   font-size: 18px;
   text-align: left;
+  color: #333; /* 改變文字顏色 */
 }
 
 .coin-table th,
@@ -192,6 +193,31 @@ export default defineComponent({
   .whitepaper-thumbnail {
     width: 40px;
     height: 40px;
+  }
+
+  .coin-table th,
+  .coin-table td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .coin-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+
+  .coin-table td {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding-left: 0;
+  }
+
+  .coin-table tr {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
   }
 }
 </style>
