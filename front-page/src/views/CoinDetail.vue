@@ -130,6 +130,7 @@ export default defineComponent({
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  width: 100%; /* 確保容器全寬 */
 }
 
 .coin-logo {

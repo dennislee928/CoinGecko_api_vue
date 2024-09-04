@@ -52,11 +52,13 @@ export default {
 <style scoped>
 .container {
   padding: 20px;
+  width: 100%; /* 確保容器全寬 */
 }
 
 .coin-list {
   list-style-type: none;
   padding: 0;
+  width: 100%; /* 確保列表全寬 */
 }
 
 .coin-item {
@@ -66,6 +68,8 @@ export default {
 .coin-item a {
   text-decoration: none;
   color: #42b983;
+  display: block; /* 使鏈接佔滿整個項目 */
+  width: 100%; /* 確保鏈接全寬 */
 }
 
 .coin-item a:hover {

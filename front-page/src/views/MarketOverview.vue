@@ -91,11 +91,12 @@ export default defineComponent({
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  width: 100%; /* 確保容器全寬 */
 }
 
 .market-table {
-  width: 100%;
-  max-width: 800px;
+  width: 100%; /* 確保表格全寬 */
+  max-width: 800px; /* 可選，根據需要調整 */
   border-collapse: collapse;
   margin: 20px 0;
   font-size: 18px;
