@@ -1,6 +1,9 @@
 <template>
   <div class="container">
     <h1>Market Overview</h1>
+    <router-link to="/coins">
+      <h2>See all coins list</h2>
+    </router-link>
     <table class="market-table">
       <tr>
         <th>Market Cap (USD)</th>

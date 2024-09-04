@@ -1,7 +1,99 @@
 <template>
-  <div>
-    <h1>Coin Detail</h1>
-    <pre>{{ coinData }}</pre>
+  <div class="container">
+    <h1>{{ coinData.name }} ({{ coinData.symbol }})</h1>
+    <img :src="coinData.logo" alt="Logo" class="coin-logo" />
+    <p>{{ coinData.description }}</p>
+    <table class="coin-table">
+      <tr>
+        <th>ID</th>
+        <td>{{ coinData.id }}</td>
+      </tr>
+      <tr>
+        <th>Rank</th>
+        <td>{{ coinData.rank }}</td>
+      </tr>
+      <tr>
+        <th>Type</th>
+        <td>{{ coinData.type }}</td>
+      </tr>
+      <tr>
+        <th>Is New</th>
+        <td>{{ coinData.is_new }}</td>
+      </tr>
+      <tr>
+        <th>Is Active</th>
+        <td>{{ coinData.is_active }}</td>
+      </tr>
+      <tr>
+        <th>Started At</th>
+        <td>{{ new Date(coinData.started_at).toLocaleString() }}</td>
+      </tr>
+      <tr>
+        <th>Development Status</th>
+        <td>{{ coinData.development_status }}</td>
+      </tr>
+      <tr>
+        <th>Hardware Wallet</th>
+        <td>{{ coinData.hardware_wallet }}</td>
+      </tr>
+      <tr>
+        <th>Proof Type</th>
+        <td>{{ coinData.proof_type }}</td>
+      </tr>
+      <tr>
+        <th>Org Structure</th>
+        <td>{{ coinData.org_structure }}</td>
+      </tr>
+      <tr>
+        <th>Hash Algorithm</th>
+        <td>{{ coinData.hash_algorithm }}</td>
+      </tr>
+      <tr>
+        <th>Tags</th>
+        <td>
+          <ul>
+            <li v-for="tag in coinData.tags" :key="tag.id">{{ tag.name }}</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>Team</th>
+        <td>
+          <ul>
+            <li v-for="member in coinData.team" :key="member.id">
+              {{ member.name }} - {{ member.position }}
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>Links</th>
+        <td>
+          <ul>
+            <li v-for="(link, type) in coinData.links" :key="type">
+              <strong>{{ type }}:</strong>
+              <ul>
+                <li v-for="url in link" :key="url">
+                  <a :href="url" target="_blank">{{ url }}</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <th>Whitepaper</th>
+        <td>
+          <a :href="coinData.whitepaper.link" target="_blank">
+            <img
+              :src="coinData.whitepaper.thumbnail"
+              alt="Whitepaper Thumbnail"
+              class="whitepaper-thumbnail"
+            />
+          </a>
+        </td>
+      </tr>
+    </table>
   </div>
 </template>
 
@@ -29,3 +121,75 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.coin-logo {
+  width: 100px;
+  height: 100px;
+  margin: 20px 0;
+}
+
+.coin-table {
+  width: 100%;
+  max-width: 800px;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 18px;
+  text-align: left;
+}
+
+.coin-table th,
+.coin-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
+
+.coin-table th {
+  background-color: #f4f4f4;
+}
+
+.coin-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.coin-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.whitepaper-thumbnail {
+  width: 50px;
+  height: 50px;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+  .coin-table {
+    font-size: 14px;
+  }
+
+  .coin-table th,
+  .coin-table td {
+    padding: 8px 10px;
+  }
+
+  .coin-logo {
+    width: 80px;
+    height: 80px;
+  }
+
+  .whitepaper-thumbnail {
+    width: 40px;
+    height: 40px;
+  }
+}
+</style>
