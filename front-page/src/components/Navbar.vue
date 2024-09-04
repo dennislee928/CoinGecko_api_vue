@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar">
     <div class="navbar-container">
-      <router-link to="/" class="navbar-logo">Crypto App</router-link>
+      <router-link to="/" class="navbar-logo">Crypto Info App</router-link>
       <ul class="navbar-menu">
         <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/coins">Coins</router-link></li>

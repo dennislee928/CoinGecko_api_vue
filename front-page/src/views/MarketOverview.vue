@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <NavbarItem />
-    <h1>Market Overview</h1>
+    <h1 class="title">Market Overview</h1>
     <router-link to="/coins">
       <h2>See all coins list</h2>
     </router-link>
@@ -82,6 +82,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.title {
+  text-align: center;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -142,7 +146,8 @@ export default defineComponent({
   }
 
   .market-table tr {
-    margin-bottom: 10px; /* 增加行間距 */
+    margin-bottom: 20px; /* 增加行間距 */
+    margin-top: 20px;
   }
 }
 </style>
