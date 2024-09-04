@@ -95,6 +95,7 @@
         </td>
       </tr>
     </table>
+    <AppFooter />
   </div>
 </template>
 

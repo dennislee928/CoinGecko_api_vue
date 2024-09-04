@@ -8,6 +8,7 @@
         </router-link>
       </li>
     </ul>
+    <AppFooter />
   </div>
 </template>
 

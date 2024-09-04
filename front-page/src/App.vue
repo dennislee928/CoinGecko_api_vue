@@ -2,16 +2,19 @@
   <div id="app">
     <NavbarItem />
     <router-view />
+    <AppFooter />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import NavbarItem from './components/Navbar.vue'
+import AppFooter from './components/Footer.vue'
 export default defineComponent({
   name: 'App',
   components: {
-    NavbarItem // 將 NavbarItem 加入 components 中
+    NavbarItem, // 將 NavbarItem 加入 components 中
+    AppFooter
   }
 })
 </script>

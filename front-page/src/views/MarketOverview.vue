@@ -59,6 +59,7 @@
         <td>{{ new Date(marketData.last_updated * 1000).toLocaleString() }}</td>
       </tr>
     </table>
+    <AppFooter />
   </div>
 </template>
 
