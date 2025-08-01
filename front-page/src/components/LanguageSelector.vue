@@ -44,9 +44,11 @@ export default defineComponent({
       isOpen.value = !isOpen.value
     }
 
-    const selectLocale = (code: 'zh' | 'en') => {
-      setLocale(code)
-      isOpen.value = false
+    const selectLocale = (code: string) => {
+      if (code === 'zh' || code === 'en') {
+        setLocale(code as 'zh' | 'en')
+        isOpen.value = false
+      }
     }
 
     const closeDropdown = (event: Event) => {

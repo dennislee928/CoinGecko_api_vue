@@ -17,7 +17,9 @@
             type="text"
             :placeholder="t('coins.searchPlaceholder')"
             class="search-input"
-            @input="coinStore.setSearchQuery($event.target.value)"
+            @input="
+              (event) => coinStore.setSearchQuery((event.target as HTMLInputElement)?.value || '')
+            "
           />
         </div>
 

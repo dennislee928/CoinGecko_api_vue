@@ -1,7 +1,7 @@
 <template>
   <div class="coin-detail-page">
     <NavbarItem />
-    
+
     <!-- 載入狀態 -->
     <div v-if="loading" class="loading-section">
       <div class="loading-spinner"></div>
@@ -26,7 +26,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="coin-status">
           <div class="status-badge" :class="{ active: coinData.is_active }">
             {{ coinData.is_active ? '活躍' : '非活躍' }}
@@ -103,11 +103,11 @@
             <div v-for="(link, type) in coinData.links" :key="type" class="link-group">
               <h4 class="link-type">{{ formatLinkType(type) }}</h4>
               <div class="link-list">
-                <a 
-                  v-for="url in link" 
-                  :key="url" 
-                  :href="url" 
-                  target="_blank" 
+                <a
+                  v-for="url in link"
+                  :key="url"
+                  :href="url"
+                  target="_blank"
                   rel="noopener noreferrer"
                   class="link-item"
                 >
@@ -123,16 +123,16 @@
         <!-- 白皮書卡片 -->
         <div class="info-card" v-if="coinData.whitepaper && coinData.whitepaper.link">
           <h3>白皮書</h3>
-          <a 
-            :href="coinData.whitepaper.link" 
-            target="_blank" 
+          <a
+            :href="coinData.whitepaper.link"
+            target="_blank"
             rel="noopener noreferrer"
             class="whitepaper-link"
           >
             <div class="whitepaper-content">
-              <img 
-                v-if="coinData.whitepaper.thumbnail" 
-                :src="coinData.whitepaper.thumbnail" 
+              <img
+                v-if="coinData.whitepaper.thumbnail"
+                :src="coinData.whitepaper.thumbnail"
                 alt="白皮書縮圖"
                 class="whitepaper-thumbnail"
               />
@@ -202,22 +202,22 @@ export default defineComponent({
     // 取得幣種圖示
     const getCoinIcon = (symbol: string) => {
       const icons: { [key: string]: string } = {
-        'btc': '₿',
-        'eth': 'Ξ',
-        'usdt': '💵',
-        'usdc': '💵',
-        'bnb': '🟡',
-        'ada': '🔷',
-        'sol': '☀️',
-        'dot': '🔴',
-        'doge': '🐕',
-        'avax': '❄️'
+        btc: '₿',
+        eth: 'Ξ',
+        usdt: '💵',
+        usdc: '💵',
+        bnb: '🟡',
+        ada: '🔷',
+        sol: '☀️',
+        dot: '🔴',
+        doge: '🐕',
+        avax: '❄️'
       }
       return icons[symbol.toLowerCase()] || '🪙'
     }
 
     // 格式化日期
-    const formatDate = (dateString: string) => {
+    const formatDate = (dateString: string | undefined) => {
       if (!dateString) return 'N/A'
       return new Date(dateString).toLocaleDateString('zh-TW')
     }
@@ -225,13 +225,13 @@ export default defineComponent({
     // 格式化連結類型
     const formatLinkType = (type: string) => {
       const typeMap: { [key: string]: string } = {
-        'website': '官方網站',
-        'twitter': 'Twitter',
-        'reddit': 'Reddit',
-        'source_code': '原始碼',
-        'technical_doc': '技術文件',
-        'explorer': '區塊鏈瀏覽器',
-        'message_board': '討論區'
+        website: '官方網站',
+        twitter: 'Twitter',
+        reddit: 'Reddit',
+        source_code: '原始碼',
+        technical_doc: '技術文件',
+        explorer: '區塊鏈瀏覽器',
+        message_board: '討論區'
       }
       return typeMap[type] || type
     }
@@ -239,24 +239,25 @@ export default defineComponent({
     // 取得連結圖示
     const getLinkIcon = (type: string) => {
       const icons: { [key: string]: string } = {
-        'website': '🌐',
-        'twitter': '🐦',
-        'reddit': '🤖',
-        'source_code': '💻',
-        'technical_doc': '📄',
-        'explorer': '🔍',
-        'message_board': '💬'
+        website: '🌐',
+        twitter: '🐦',
+        reddit: '🤖',
+        source_code: '💻',
+        technical_doc: '📄',
+        explorer: '🔍',
+        message_board: '💬'
       }
       return icons[type] || '🔗'
     }
 
     // 從URL取得域名
-    const getDomainFromUrl = (url: string) => {
+    const getDomainFromUrl = (url: string | number) => {
       try {
-        const domain = new URL(url).hostname.replace('www.', '')
+        const urlString = String(url)
+        const domain = new URL(urlString).hostname.replace('www.', '')
         return domain
       } catch {
-        return url
+        return String(url)
       }
     }
 
@@ -266,7 +267,7 @@ export default defineComponent({
         loading.value = true
         const response = await fetch(`https://api.coinpaprika.com/v1/coins/${route.params.id}`)
         if (!response.ok) throw new Error('Network response was not ok')
-        
+
         const data = await response.json()
         coinData.value = data
       } catch (error) {
@@ -669,30 +670,30 @@ export default defineComponent({
     gap: var(--spacing-lg);
     align-items: flex-start;
   }
-  
+
   .coin-info {
     flex-direction: column;
     text-align: center;
     gap: var(--spacing-md);
   }
-  
+
   .coin-name {
     font-size: 1.5rem;
   }
-  
+
   .info-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .info-card {
     padding: var(--spacing-lg);
   }
-  
+
   .coin-icon {
     width: 60px;
     height: 60px;
   }
-  
+
   .coin-placeholder {
     font-size: 2rem;
   }
