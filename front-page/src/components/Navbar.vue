@@ -9,11 +9,11 @@
       <div class="navbar-menu">
         <router-link to="/" class="nav-link" active-class="active">
           <span class="nav-icon">📊</span>
-          <span class="nav-text">{{ $t('nav.marketOverview') }}</span>
+          <span class="nav-text">{{ t('nav.marketOverview') }}</span>
         </router-link>
         <router-link to="/coins" class="nav-link" active-class="active">
           <span class="nav-icon">🪙</span>
-          <span class="nav-text">{{ $t('nav.coinList') }}</span>
+          <span class="nav-text">{{ t('nav.coinList') }}</span>
         </router-link>
         <LanguageSelector />
       </div>
@@ -29,11 +29,11 @@
     <div class="mobile-menu" :class="{ active: isMobileMenuOpen }">
       <router-link to="/" class="mobile-nav-link" @click="closeMobileMenu">
         <span class="nav-icon">📊</span>
-        <span>{{ $t('nav.marketOverview') }}</span>
+        <span>{{ t('nav.marketOverview') }}</span>
       </router-link>
       <router-link to="/coins" class="mobile-nav-link" @click="closeMobileMenu">
         <span class="nav-icon">🪙</span>
-        <span>{{ $t('nav.coinList') }}</span>
+        <span>{{ t('nav.coinList') }}</span>
       </router-link>
       <div class="mobile-language-selector">
         <LanguageSelector />
@@ -44,6 +44,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import LanguageSelector from './LanguageSelector.vue'
 
 export default defineComponent({
@@ -52,6 +53,7 @@ export default defineComponent({
     LanguageSelector
   },
   setup() {
+    const { t } = useI18n()
     const isMobileMenuOpen = ref(false)
 
     const toggleMobileMenu = () => {

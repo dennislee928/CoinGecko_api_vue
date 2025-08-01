@@ -21,7 +21,7 @@
           <div class="metric-card primary">
             <div class="metric-icon">💰</div>
             <div class="metric-content">
-              <h3 class="metric-label">{{ $t('market.totalMarketCap') }}</h3>
+              <h3 class="metric-label">{{ t('market.totalMarketCap') }}</h3>
               <p class="metric-value">${{ formatNumber(marketData.market_cap_usd) }}</p>
               <span class="metric-change" :class="getChangeClass(marketData.market_cap_change_24h)">
                 {{ formatChange(marketData.market_cap_change_24h) }}
@@ -32,7 +32,7 @@
           <div class="metric-card">
             <div class="metric-icon">📈</div>
             <div class="metric-content">
-              <h3 class="metric-label">{{ $t('market.volume24h') }}</h3>
+              <h3 class="metric-label">{{ t('market.volume24h') }}</h3>
               <p class="metric-value">${{ formatNumber(marketData.volume_24h_usd) }}</p>
               <span class="metric-change" :class="getChangeClass(marketData.volume_24h_change_24h)">
                 {{ formatChange(marketData.volume_24h_change_24h) }}
@@ -43,7 +43,7 @@
           <div class="metric-card">
             <div class="metric-icon">₿</div>
             <div class="metric-content">
-              <h3 class="metric-label">{{ $t('market.bitcoinDominance') }}</h3>
+              <h3 class="metric-label">{{ t('market.bitcoinDominance') }}</h3>
               <p class="metric-value">{{ marketData.bitcoin_dominance_percentage }}%</p>
             </div>
           </div>
@@ -51,7 +51,7 @@
           <div class="metric-card">
             <div class="metric-icon">🪙</div>
             <div class="metric-content">
-              <h3 class="metric-label">{{ $t('market.activeCoins') }}</h3>
+              <h3 class="metric-label">{{ t('market.activeCoins') }}</h3>
               <p class="metric-value">{{ formatNumber(marketData.cryptocurrencies_number) }}</p>
             </div>
           </div>
@@ -60,9 +60,9 @@
         <!-- 詳細數據表格 -->
         <div class="market-details">
           <div class="details-header">
-            <h2>{{ $t('market.marketDetails') }}</h2>
+            <h2>{{ t('market.marketDetails') }}</h2>
             <router-link to="/coins" class="btn btn-primary">
-              <span>{{ $t('market.viewCoinList') }}</span>
+              <span>{{ t('market.viewCoinList') }}</span>
               <span class="arrow">→</span>
             </router-link>
           </div>
