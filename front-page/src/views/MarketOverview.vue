@@ -4,14 +4,14 @@
     <div class="container">
       <!-- 頁面標題 -->
       <div class="page-header">
-        <h1 class="page-title">市場概覽</h1>
-        <p class="page-subtitle">全球加密貨幣市場實時數據</p>
+        <h1 class="page-title">{{ $t('page.marketOverview') }}</h1>
+        <p class="page-subtitle">{{ $t('page.marketOverviewSubtitle') }}</p>
       </div>
 
       <!-- 載入狀態 -->
       <div v-if="loading" class="loading-section">
         <div class="loading-spinner"></div>
-        <p>載入市場數據中...</p>
+        <p>{{ $t('market.loading') }}</p>
       </div>
 
       <!-- 市場數據 -->
@@ -21,7 +21,7 @@
           <div class="metric-card primary">
             <div class="metric-icon">💰</div>
             <div class="metric-content">
-              <h3 class="metric-label">總市值</h3>
+              <h3 class="metric-label">{{ $t('market.totalMarketCap') }}</h3>
               <p class="metric-value">${{ formatNumber(marketData.market_cap_usd) }}</p>
               <span class="metric-change" :class="getChangeClass(marketData.market_cap_change_24h)">
                 {{ formatChange(marketData.market_cap_change_24h) }}
@@ -32,7 +32,7 @@
           <div class="metric-card">
             <div class="metric-icon">📈</div>
             <div class="metric-content">
-              <h3 class="metric-label">24小時交易量</h3>
+              <h3 class="metric-label">{{ $t('market.volume24h') }}</h3>
               <p class="metric-value">${{ formatNumber(marketData.volume_24h_usd) }}</p>
               <span class="metric-change" :class="getChangeClass(marketData.volume_24h_change_24h)">
                 {{ formatChange(marketData.volume_24h_change_24h) }}
@@ -43,7 +43,7 @@
           <div class="metric-card">
             <div class="metric-icon">₿</div>
             <div class="metric-content">
-              <h3 class="metric-label">比特幣主導地位</h3>
+              <h3 class="metric-label">{{ $t('market.bitcoinDominance') }}</h3>
               <p class="metric-value">{{ marketData.bitcoin_dominance_percentage }}%</p>
             </div>
           </div>
@@ -51,7 +51,7 @@
           <div class="metric-card">
             <div class="metric-icon">🪙</div>
             <div class="metric-content">
-              <h3 class="metric-label">活躍幣種</h3>
+              <h3 class="metric-label">{{ $t('market.activeCoins') }}</h3>
               <p class="metric-value">{{ formatNumber(marketData.cryptocurrencies_number) }}</p>
             </div>
           </div>
@@ -112,13 +112,16 @@
             <div class="trend-card">
               <div class="trend-header">
                 <h4>市值變化</h4>
-                <span class="trend-indicator" :class="getTrendClass(marketData.market_cap_change_24h)">
+                <span
+                  class="trend-indicator"
+                  :class="getTrendClass(marketData.market_cap_change_24h)"
+                >
                   {{ marketData.market_cap_change_24h > 0 ? '↗' : '↘' }}
                 </span>
               </div>
               <div class="trend-bar">
-                <div 
-                  class="trend-fill" 
+                <div
+                  class="trend-fill"
                   :class="getTrendClass(marketData.market_cap_change_24h)"
                   :style="{ width: Math.abs(marketData.market_cap_change_24h) + '%' }"
                 ></div>
@@ -129,13 +132,16 @@
             <div class="trend-card">
               <div class="trend-header">
                 <h4>交易量變化</h4>
-                <span class="trend-indicator" :class="getTrendClass(marketData.volume_24h_change_24h)">
+                <span
+                  class="trend-indicator"
+                  :class="getTrendClass(marketData.volume_24h_change_24h)"
+                >
                   {{ marketData.volume_24h_change_24h > 0 ? '↗' : '↘' }}
                 </span>
               </div>
               <div class="trend-bar">
-                <div 
-                  class="trend-fill" 
+                <div
+                  class="trend-fill"
                   :class="getTrendClass(marketData.volume_24h_change_24h)"
                   :style="{ width: Math.abs(marketData.volume_24h_change_24h) + '%' }"
                 ></div>
@@ -230,7 +236,7 @@ export default defineComponent({
         loading.value = true
         const response = await fetch('https://api.coinpaprika.com/v1/global')
         if (!response.ok) throw new Error('Network response was not ok')
-        
+
         const data = await response.json()
         marketData.value = data
       } catch (error) {
@@ -588,35 +594,35 @@ export default defineComponent({
   .page-title {
     font-size: 2rem;
   }
-  
+
   .key-metrics {
     grid-template-columns: 1fr;
   }
-  
+
   .details-header {
     flex-direction: column;
     gap: var(--spacing-md);
     align-items: flex-start;
   }
-  
+
   .details-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .trends-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .metric-card {
     padding: var(--spacing-md);
   }
-  
+
   .metric-icon {
     width: 50px;
     height: 50px;
     font-size: 1.5rem;
   }
-  
+
   .metric-value {
     font-size: 1.25rem;
   }

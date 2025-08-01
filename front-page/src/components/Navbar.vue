@@ -5,55 +5,63 @@
         <div class="logo-icon">₿</div>
         <span>Crypto Tracker</span>
       </router-link>
-      
+
       <div class="navbar-menu">
         <router-link to="/" class="nav-link" active-class="active">
           <span class="nav-icon">📊</span>
-          <span class="nav-text">市場概覽</span>
+          <span class="nav-text">{{ $t('nav.marketOverview') }}</span>
         </router-link>
         <router-link to="/coins" class="nav-link" active-class="active">
           <span class="nav-icon">🪙</span>
-          <span class="nav-text">幣種列表</span>
+          <span class="nav-text">{{ $t('nav.coinList') }}</span>
         </router-link>
+        <LanguageSelector />
       </div>
-      
+
       <div class="navbar-mobile-toggle" @click="toggleMobileMenu">
         <span></span>
         <span></span>
         <span></span>
       </div>
     </div>
-    
+
     <!-- 行動版選單 -->
-    <div class="mobile-menu" :class="{ 'active': isMobileMenuOpen }">
+    <div class="mobile-menu" :class="{ active: isMobileMenuOpen }">
       <router-link to="/" class="mobile-nav-link" @click="closeMobileMenu">
         <span class="nav-icon">📊</span>
-        <span>市場概覽</span>
+        <span>{{ $t('nav.marketOverview') }}</span>
       </router-link>
       <router-link to="/coins" class="mobile-nav-link" @click="closeMobileMenu">
         <span class="nav-icon">🪙</span>
-        <span>幣種列表</span>
+        <span>{{ $t('nav.coinList') }}</span>
       </router-link>
+      <div class="mobile-language-selector">
+        <LanguageSelector />
+      </div>
     </div>
   </nav>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import LanguageSelector from './LanguageSelector.vue'
 
 export default defineComponent({
   name: 'NavbarItem',
+  components: {
+    LanguageSelector
+  },
   setup() {
     const isMobileMenuOpen = ref(false)
-    
+
     const toggleMobileMenu = () => {
       isMobileMenuOpen.value = !isMobileMenuOpen.value
     }
-    
+
     const closeMobileMenu = () => {
       isMobileMenuOpen.value = false
     }
-    
+
     return {
       isMobileMenuOpen,
       toggleMobileMenu,
@@ -197,19 +205,25 @@ export default defineComponent({
   background: rgba(99, 102, 241, 0.1);
 }
 
+.mobile-language-selector {
+  padding: var(--spacing-md);
+  border-top: 1px solid var(--border-color);
+  margin-top: var(--spacing-sm);
+}
+
 @media (max-width: 768px) {
   .navbar-menu {
     display: none;
   }
-  
+
   .navbar-mobile-toggle {
     display: flex;
   }
-  
+
   .mobile-menu {
     display: block;
   }
-  
+
   .navbar-logo span {
     display: none;
   }
@@ -219,7 +233,7 @@ export default defineComponent({
   .navbar-container {
     padding: 0 var(--spacing-sm);
   }
-  
+
   .navbar-logo {
     font-size: 1.1rem;
   }

@@ -4,8 +4,8 @@
     <div class="container">
       <!-- 頁面標題 -->
       <div class="page-header">
-        <h1 class="page-title">幣種列表</h1>
-        <p class="page-subtitle">探索全球加密貨幣市場</p>
+        <h1 class="page-title">{{ $t('page.coinList') }}</h1>
+        <p class="page-subtitle">{{ $t('page.coinListSubtitle') }}</p>
       </div>
 
       <!-- 搜尋和篩選 -->
@@ -15,12 +15,12 @@
           <input
             v-model="searchQuery"
             type="text"
-            placeholder="搜尋幣種..."
+            :placeholder="$t('coins.searchPlaceholder')"
             class="search-input"
             @input="coinStore.setSearchQuery($event.target.value)"
           />
         </div>
-        
+
         <div class="filter-buttons">
           <button
             v-for="filter in filters"
@@ -34,9 +34,9 @@
       </div>
 
       <!-- 載入狀態 -->
-      <div v-if="loading && !coins.length" class="loading-section">
+      <div v-if="loading && !displayedCoins.length" class="loading-section">
         <div class="loading-spinner"></div>
-        <p>載入幣種資料中...</p>
+        <p>{{ $t('coins.loading') }}</p>
       </div>
 
       <!-- 幣種網格 -->
@@ -55,22 +55,20 @@
               <h3 class="coin-name">{{ coin.name }}</h3>
               <p class="coin-symbol">{{ coin.symbol.toUpperCase() }}</p>
             </div>
-            <div class="coin-rank" v-if="coin.rank">
-              #{{ coin.rank }}
-            </div>
+            <div class="coin-rank" v-if="coin.rank">#{{ coin.rank }}</div>
           </div>
-          
+
           <div class="coin-details" v-if="coin.price">
             <div class="price-info">
-              <span class="price-label">價格</span>
+              <span class="price-label">{{ $t('coins.price') }}</span>
               <span class="price-value">${{ formatPrice(coin.price) }}</span>
             </div>
             <div class="change-info" :class="getChangeClass(coin.change_24h)">
-              <span class="change-label">24h</span>
+              <span class="change-label">{{ $t('coins.change24h') }}</span>
               <span class="change-value">{{ formatChange(coin.change_24h) }}</span>
             </div>
           </div>
-          
+
           <div class="coin-details skeleton" v-else>
             <div class="skeleton-line"></div>
             <div class="skeleton-line"></div>
@@ -81,15 +79,15 @@
       <!-- 載入更多按鈕 -->
       <div v-if="hasMore && !loading" class="load-more-section">
         <button @click="loadMore" class="btn btn-primary load-more-btn">
-          <span>載入更多</span>
+          <span>{{ $t('coins.loadMore') }}</span>
         </button>
       </div>
 
       <!-- 無結果 -->
       <div v-if="!loading && !displayedCoins.length" class="no-results">
         <div class="no-results-icon">🔍</div>
-        <h3>找不到相關幣種</h3>
-        <p>請嘗試其他搜尋關鍵字</p>
+        <h3>{{ $t('coins.noResults') }}</h3>
+        <p>{{ $t('coins.noResultsMessage') }}</p>
       </div>
     </div>
   </div>
@@ -119,12 +117,12 @@ export default defineComponent({
     const router = useRouter()
     const coinStore = useCoinStore()
 
-    const filters = [
-      { label: '全部', value: 'all' },
-      { label: '前10名', value: 'top10' },
-      { label: '前50名', value: 'top50' },
-      { label: '前100名', value: 'top100' }
-    ]
+    const filters = computed(() => [
+      { label: $t('coins.filters.all'), value: 'all' },
+      { label: $t('coins.filters.top10'), value: 'top10' },
+      { label: $t('coins.filters.top50'), value: 'top50' },
+      { label: $t('coins.filters.top100'), value: 'top100' }
+    ])
 
     // 使用store的getters
     const displayedCoins = computed(() => coinStore.displayedCoins)
@@ -156,16 +154,16 @@ export default defineComponent({
     // 取得幣種圖示
     const getCoinIcon = (symbol: string) => {
       const icons: { [key: string]: string } = {
-        'btc': '₿',
-        'eth': 'Ξ',
-        'usdt': '💵',
-        'usdc': '💵',
-        'bnb': '🟡',
-        'ada': '🔷',
-        'sol': '☀️',
-        'dot': '🔴',
-        'doge': '🐕',
-        'avax': '❄️'
+        btc: '₿',
+        eth: 'Ξ',
+        usdt: '💵',
+        usdc: '💵',
+        bnb: '🟡',
+        ada: '🔷',
+        sol: '☀️',
+        dot: '🔴',
+        doge: '🐕',
+        avax: '❄️'
       }
       return icons[symbol.toLowerCase()] || '🪙'
     }
@@ -482,20 +480,20 @@ export default defineComponent({
   .page-title {
     font-size: 2rem;
   }
-  
+
   .coins-grid {
     grid-template-columns: 1fr;
     gap: var(--spacing-md);
   }
-  
+
   .coin-card {
     padding: var(--spacing-md);
   }
-  
+
   .filter-buttons {
     gap: var(--spacing-xs);
   }
-  
+
   .filter-btn {
     padding: var(--spacing-xs) var(--spacing-sm);
     font-size: 0.8rem;
