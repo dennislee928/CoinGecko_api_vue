@@ -191,50 +191,13 @@ export default defineComponent({
       router.push({ name: 'CoinDetail', params: { id: coinId } })
     }
 
-    // 載入幣種資料
-    const fetchCoins = async () => {
-      try {
-        loading.value = true
-        const response = await fetch('https://api.coinpaprika.com/v1/coins')
-        if (!response.ok) throw new Error('Network response was not ok')
-        
-        const data = await response.json()
-        coins.value = data.slice(0, 100) // 限制載入前100個幣種
-        
-        // 載入價格資料
-        await loadPrices()
-      } catch (error) {
-        console.error('Error fetching coins:', error)
-      } finally {
-        loading.value = false
-      }
-    }
-
-    // 載入價格資料
-    const loadPrices = async () => {
-      const pricePromises = coins.value.slice(0, 20).map(async (coin) => {
-        try {
-          const response = await fetch(`https://api.coinpaprika.com/v1/tickers/${coin.id}`)
-          if (response.ok) {
-            const ticker = await response.json()
-            coin.price = ticker.quotes.USD.price
-            coin.change_24h = ticker.quotes.USD.percent_change_24h
-          }
-        } catch (error) {
-          console.error(`Error fetching price for ${coin.id}:`, error)
-        }
-      })
-
-      await Promise.all(pricePromises)
-    }
-
     // 監聽搜尋變化
     watch(searchQuery, () => {
       handleSearch()
     })
 
     onMounted(() => {
-      fetchCoins()
+      coinStore.fetchCoins()
     })
 
     return {
