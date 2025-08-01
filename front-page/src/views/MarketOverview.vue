@@ -163,7 +163,7 @@
         <button @click="fetchMarketData" class="btn btn-primary">重新載入</button>
       </div>
     </div>
-    <Footer />
+    <AppFooter />
   </div>
 </template>
 
