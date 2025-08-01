@@ -60,9 +60,9 @@
         <!-- 詳細數據表格 -->
         <div class="market-details">
           <div class="details-header">
-            <h2>市場詳細數據</h2>
+            <h2>{{ $t('market.marketDetails') }}</h2>
             <router-link to="/coins" class="btn btn-primary">
-              <span>查看幣種列表</span>
+              <span>{{ $t('market.viewCoinList') }}</span>
               <span class="arrow">→</span>
             </router-link>
           </div>
