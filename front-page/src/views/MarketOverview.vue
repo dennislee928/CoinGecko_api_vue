@@ -1,3 +1,4 @@
+<!-- eslint-disable @typescript-eslint/no-unused-vars -->
 <template>
   <div class="market-page">
     <NavbarItem />
@@ -172,6 +173,7 @@ import { defineComponent, ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import NavbarItem from '../components/Navbar.vue'
 import LiveBTCPrice from '../components/LiveBTCPrice.vue'
+import AppFooter from '../components/Footer.vue'
 
 interface MarketData {
   market_cap_usd: number
@@ -194,7 +196,8 @@ export default defineComponent({
   name: 'MarketOverview',
   components: {
     NavbarItem,
-    LiveBTCPrice
+    LiveBTCPrice,
+    AppFooter
   },
   setup() {
     const { t } = useI18n()

@@ -102,6 +102,7 @@ import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useCoinStore } from '../stores/coinStore'
 import NavbarItem from '../components/Navbar.vue'
+import AppFooter from '../components/Footer.vue'
 
 interface Coin {
   id: string
@@ -115,7 +116,8 @@ interface Coin {
 export default defineComponent({
   name: 'CoinList',
   components: {
-    NavbarItem
+    NavbarItem,
+    AppFooter
   },
   setup() {
     const router = useRouter()

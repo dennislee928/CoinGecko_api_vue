@@ -167,6 +167,7 @@
 import { defineComponent, ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import NavbarItem from '../components/Navbar.vue'
+import AppFooter from '../components/Footer.vue'
 
 interface CoinData {
   id: string
@@ -193,7 +194,8 @@ interface CoinData {
 export default defineComponent({
   name: 'CoinDetail',
   components: {
-    NavbarItem
+    NavbarItem,
+    AppFooter
   },
   setup() {
     const route = useRoute()
