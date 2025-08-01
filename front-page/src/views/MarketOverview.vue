@@ -16,6 +16,9 @@
 
       <!-- 市場數據 -->
       <div v-else-if="marketData" class="market-content">
+        <!-- 即時BTC價格 -->
+        <LiveBTCPrice />
+
         <!-- 主要指標卡片 -->
         <div class="key-metrics">
           <div class="metric-card primary">
@@ -167,6 +170,7 @@
 import { defineComponent, ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import NavbarItem from '../components/Navbar.vue'
+import LiveBTCPrice from '../components/LiveBTCPrice.vue'
 
 interface MarketData {
   market_cap_usd: number
@@ -188,7 +192,8 @@ interface MarketData {
 export default defineComponent({
   name: 'MarketOverview',
   components: {
-    NavbarItem
+    NavbarItem,
+    LiveBTCPrice
   },
   setup() {
     const { t } = useI18n()

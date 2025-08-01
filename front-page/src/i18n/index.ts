@@ -35,7 +35,14 @@ const zh = {
     loadFailed: '載入失敗',
     loadFailedMessage: '無法載入市場數據，請稍後再試',
     reload: '重新載入',
-    loading: '載入市場數據中...'
+    loading: '載入市場數據中...',
+    bitcoin: '比特幣',
+    livePrice: '即時價格',
+    currentPrice: '當前價格',
+    change24h: '24小時變化',
+    marketCap: '市值',
+    connected: '已連接',
+    connecting: '連接中'
   },
 
   // 幣種列表
@@ -161,7 +168,14 @@ const en = {
     loadFailed: 'Load Failed',
     loadFailedMessage: 'Unable to load market data, please try again later',
     reload: 'Reload',
-    loading: 'Loading market data...'
+    loading: 'Loading market data...',
+    bitcoin: 'Bitcoin',
+    livePrice: 'Live Price',
+    currentPrice: 'Current Price',
+    change24h: '24h Change',
+    marketCap: 'Market Cap',
+    connected: 'Connected',
+    connecting: 'Connecting'
   },
 
   // Coin list
