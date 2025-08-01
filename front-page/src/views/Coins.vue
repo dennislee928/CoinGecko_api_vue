@@ -1,5 +1,6 @@
 <template>
   <div class="coins-page">
+    <NavbarItem />
     <div class="container">
       <!-- 頁面標題 -->
       <div class="page-header">
@@ -98,6 +99,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import NavbarItem from '../components/Navbar.vue'
 
 interface Coin {
   id: string
@@ -110,6 +112,9 @@ interface Coin {
 
 export default defineComponent({
   name: 'CoinList',
+  components: {
+    NavbarItem
+  },
   setup() {
     const router = useRouter()
     const coins = ref<Coin[]>([])
