@@ -4,14 +4,14 @@
     <div class="container">
       <!-- 頁面標題 -->
       <div class="page-header">
-        <h1 class="page-title">{{ $t('page.marketOverview') }}</h1>
-        <p class="page-subtitle">{{ $t('page.marketOverviewSubtitle') }}</p>
+        <h1 class="page-title">{{ t('page.marketOverview') }}</h1>
+        <p class="page-subtitle">{{ t('page.marketOverviewSubtitle') }}</p>
       </div>
 
       <!-- 載入狀態 -->
       <div v-if="loading" class="loading-section">
         <div class="loading-spinner"></div>
-        <p>{{ $t('market.loading') }}</p>
+        <p>{{ t('market.loading') }}</p>
       </div>
 
       <!-- 市場數據 -->
@@ -165,6 +165,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
 import NavbarItem from '../components/Navbar.vue'
 
 interface MarketData {
@@ -190,6 +191,7 @@ export default defineComponent({
     NavbarItem
   },
   setup() {
+    const { t } = useI18n()
     const marketData = ref<MarketData | null>(null)
     const loading = ref(true)
 

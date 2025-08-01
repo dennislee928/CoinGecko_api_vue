@@ -4,8 +4,8 @@
     <div class="container">
       <!-- 頁面標題 -->
       <div class="page-header">
-        <h1 class="page-title">{{ $t('page.coinList') }}</h1>
-        <p class="page-subtitle">{{ $t('page.coinListSubtitle') }}</p>
+        <h1 class="page-title">{{ t('page.coinList') }}</h1>
+        <p class="page-subtitle">{{ t('page.coinListSubtitle') }}</p>
       </div>
 
       <!-- 搜尋和篩選 -->
@@ -15,7 +15,7 @@
           <input
             v-model="searchQuery"
             type="text"
-            :placeholder="$t('coins.searchPlaceholder')"
+            :placeholder="t('coins.searchPlaceholder')"
             class="search-input"
             @input="coinStore.setSearchQuery($event.target.value)"
           />
@@ -36,7 +36,7 @@
       <!-- 載入狀態 -->
       <div v-if="loading && !displayedCoins.length" class="loading-section">
         <div class="loading-spinner"></div>
-        <p>{{ $t('coins.loading') }}</p>
+        <p>{{ t('coins.loading') }}</p>
       </div>
 
       <!-- 幣種網格 -->
@@ -60,11 +60,11 @@
 
           <div class="coin-details" v-if="coin.price">
             <div class="price-info">
-              <span class="price-label">{{ $t('coins.price') }}</span>
+              <span class="price-label">{{ t('coins.price') }}</span>
               <span class="price-value">${{ formatPrice(coin.price) }}</span>
             </div>
             <div class="change-info" :class="getChangeClass(coin.change_24h)">
-              <span class="change-label">{{ $t('coins.change24h') }}</span>
+              <span class="change-label">{{ t('coins.change24h') }}</span>
               <span class="change-value">{{ formatChange(coin.change_24h) }}</span>
             </div>
           </div>
@@ -79,15 +79,15 @@
       <!-- 載入更多按鈕 -->
       <div v-if="hasMore && !loading" class="load-more-section">
         <button @click="loadMore" class="btn btn-primary load-more-btn">
-          <span>{{ $t('coins.loadMore') }}</span>
+          <span>{{ t('coins.loadMore') }}</span>
         </button>
       </div>
 
       <!-- 無結果 -->
       <div v-if="!loading && !displayedCoins.length" class="no-results">
         <div class="no-results-icon">🔍</div>
-        <h3>{{ $t('coins.noResults') }}</h3>
-        <p>{{ $t('coins.noResultsMessage') }}</p>
+        <h3>{{ t('coins.noResults') }}</h3>
+        <p>{{ t('coins.noResultsMessage') }}</p>
       </div>
     </div>
   </div>
@@ -96,6 +96,7 @@
 <script lang="ts">
 import { defineComponent, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useCoinStore } from '../stores/coinStore'
 import NavbarItem from '../components/Navbar.vue'
 
@@ -115,13 +116,14 @@ export default defineComponent({
   },
   setup() {
     const router = useRouter()
+    const { t } = useI18n()
     const coinStore = useCoinStore()
 
     const filters = computed(() => [
-      { label: $t('coins.filters.all'), value: 'all' },
-      { label: $t('coins.filters.top10'), value: 'top10' },
-      { label: $t('coins.filters.top50'), value: 'top50' },
-      { label: $t('coins.filters.top100'), value: 'top100' }
+      { label: t('coins.filters.all'), value: 'all' },
+      { label: t('coins.filters.top10'), value: 'top10' },
+      { label: t('coins.filters.top50'), value: 'top50' },
+      { label: t('coins.filters.top100'), value: 'top100' }
     ])
 
     // 使用store的getters
