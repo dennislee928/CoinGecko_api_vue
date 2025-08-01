@@ -101,7 +101,7 @@
           <h3>相關連結</h3>
           <div class="links-container">
             <div v-for="(link, type) in coinData.links" :key="type" class="link-group">
-              <h4 class="link-type">{{ formatLinkType(type) }}</h4>
+              <h4 class="link-type">{{ formatLinkType(String(type)) }}</h4>
               <div class="link-list">
                 <a
                   v-for="url in link"
@@ -111,7 +111,7 @@
                   rel="noopener noreferrer"
                   class="link-item"
                 >
-                  <span class="link-icon">{{ getLinkIcon(type) }}</span>
+                  <span class="link-icon">{{ getLinkIcon(String(type)) }}</span>
                   <span class="link-text">{{ getDomainFromUrl(url) }}</span>
                   <span class="link-arrow">↗</span>
                 </a>

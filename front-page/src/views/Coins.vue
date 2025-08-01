@@ -136,7 +136,8 @@ export default defineComponent({
     const currentFilter = computed(() => coinStore.filter)
 
     // 格式化價格
-    const formatPrice = (price: number) => {
+    const formatPrice = (price: number | undefined) => {
+      if (!price) return '0.00'
       if (price < 0.01) return price.toFixed(6)
       if (price < 1) return price.toFixed(4)
       if (price < 100) return price.toFixed(2)
@@ -144,13 +145,13 @@ export default defineComponent({
     }
 
     // 格式化變化百分比
-    const formatChange = (change: number) => {
+    const formatChange = (change: number | undefined) => {
       if (!change) return '0.00%'
       return `${change > 0 ? '+' : ''}${change.toFixed(2)}%`
     }
 
     // 取得變化樣式類別
-    const getChangeClass = (change: number) => {
+    const getChangeClass = (change: number | undefined) => {
       if (!change) return 'neutral'
       return change > 0 ? 'positive' : 'negative'
     }
@@ -203,6 +204,7 @@ export default defineComponent({
 
     return {
       t,
+      coinStore,
       filters,
       displayedCoins,
       loading,
