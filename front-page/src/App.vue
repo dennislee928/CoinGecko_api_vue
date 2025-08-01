@@ -2,6 +2,7 @@
   <div id="app">
     <router-view />
   </div>
+  <Footer />
 </template>
 
 <script lang="ts">
