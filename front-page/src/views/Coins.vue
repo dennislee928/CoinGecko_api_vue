@@ -17,7 +17,7 @@
             type="text"
             placeholder="搜尋幣種..."
             class="search-input"
-            @input="handleSearch"
+            @input="coinStore.setSearchQuery($event.target.value)"
           />
         </div>
         
@@ -81,8 +81,7 @@
       <!-- 載入更多按鈕 -->
       <div v-if="hasMore && !loading" class="load-more-section">
         <button @click="loadMore" class="btn btn-primary load-more-btn">
-          <span v-if="!loadingMore">載入更多</span>
-          <div v-else class="loading-spinner"></div>
+          <span>載入更多</span>
         </button>
       </div>
 
@@ -201,14 +200,12 @@ export default defineComponent({
     })
 
     return {
-      coins,
-      loading,
-      loadingMore,
-      searchQuery,
-      currentFilter,
       filters,
       displayedCoins,
+      loading,
       hasMore,
+      searchQuery,
+      currentFilter,
       formatPrice,
       formatChange,
       getChangeClass,
