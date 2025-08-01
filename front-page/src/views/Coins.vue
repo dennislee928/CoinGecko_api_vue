@@ -200,6 +200,7 @@ export default defineComponent({
     })
 
     return {
+      t,
       filters,
       displayedCoins,
       loading,

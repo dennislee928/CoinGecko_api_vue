@@ -254,6 +254,7 @@ export default defineComponent({
     })
 
     return {
+      t,
       marketData,
       loading,
       formatNumber,

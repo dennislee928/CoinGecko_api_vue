@@ -65,6 +65,7 @@ export default defineComponent({
     }
 
     return {
+      t,
       isMobileMenuOpen,
       toggleMobileMenu,
       closeMobileMenu
