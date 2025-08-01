@@ -159,6 +159,7 @@
       <p>無法載入幣種資料，請稍後再試</p>
       <button @click="fetchCoinData" class="btn btn-primary">重新載入</button>
     </div>
+    <Footer />
   </div>
 </template>
 

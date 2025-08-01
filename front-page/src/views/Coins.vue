@@ -92,6 +92,7 @@
         <p>{{ t('coins.noResultsMessage') }}</p>
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
