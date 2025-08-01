@@ -2,19 +2,46 @@
 
 Coinpaprika API delivers precise & frequently updated market data from the world of crypto: coin prices, volumes, market caps, ATHs, return rates, and more.
 
+## add
+
+UI 設計
+✅ 現代化的深色主題設計
+✅ 漸層背景和卡片式佈局
+✅ 響應式設計，支援手機和平板
+✅ 平滑的動畫和過渡效果
+✅ 自定義滾動條樣式 2. 效能優化
+✅ Lazy loading 分頁載入
+✅ 分批載入價格資料（只載入前 20 個幣種的價格）
+✅ 5 分鐘快取機制
+✅ 骨架屏載入動畫
+✅ 優化的 API 調用 3. 國際化 (i18n)
+✅ 完整的中文和英文支援
+✅ 語言切換器組件
+✅ 本地化存儲語言偏好
+✅ 所有文字都已國際化 4. 組件系統
+✅ 通用 Selector 組件
+✅ LanguageSelector 語言選擇器
+✅ 現代化的導航欄
+✅ 響應式行動版選單 5. 功能增強
+✅ 搜尋和篩選功能
+✅ 幣種排名顯示
+✅ 價格和變化百分比
+✅ 市場趨勢圖表
+✅ 錯誤處理和重試機制
+
 ## Introduction
 
 If you want to use the Coinpaprika API, you have two main options: you can choose the API Free plan, which has sufficient limits for hobby and non-commercial use, or get one of the paid plans, ideal for commercial or professional use. To decide which plan is the best for you, check the [Plans and Pricing comparison](https://coinpaprika.com/pricing).
 
 Depending on the selected plan, you should send requests to the appropriate base URL:
 
-| Plan       | Base URL                             |
-|------------|--------------------------------------|
-| Free       | `https://api.coinpaprika.com/v1/`    |
-| Starter    | `https://api-pro.coinpaprika.com/v1/`|
-| Pro        | `https://api-pro.coinpaprika.com/v1/`|
-| Business   | `https://api-pro.coinpaprika.com/v1/`|
-| Enterprise | `https://api-pro.coinpaprika.com/v1/`|
+| Plan       | Base URL                              |
+| ---------- | ------------------------------------- |
+| Free       | `https://api.coinpaprika.com/v1/`     |
+| Starter    | `https://api-pro.coinpaprika.com/v1/` |
+| Pro        | `https://api-pro.coinpaprika.com/v1/` |
+| Business   | `https://api-pro.coinpaprika.com/v1/` |
+| Enterprise | `https://api-pro.coinpaprika.com/v1/` |
 
 ## Authentication
 
@@ -90,3 +117,4 @@ curl --request GET \
   "last_updated": 1525089441
 }
 --header 'Authorization: <api-key>'
+```
