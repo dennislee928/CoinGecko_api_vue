@@ -97,8 +97,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, onMounted, watch } from 'vue'
+import { defineComponent, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import { useCoinStore } from '../stores/coinStore'
 import NavbarItem from '../components/Navbar.vue'
 
 interface Coin {
@@ -117,14 +118,7 @@ export default defineComponent({
   },
   setup() {
     const router = useRouter()
-    const coins = ref<Coin[]>([])
-    const loading = ref(true)
-    const loadingMore = ref(false)
-    const searchQuery = ref('')
-    const currentFilter = ref('all')
-    const page = ref(1)
-    const pageSize = 20
-    const hasMore = ref(true)
+    const coinStore = useCoinStore()
 
     const filters = [
       { label: '全部', value: 'all' },
@@ -133,27 +127,12 @@ export default defineComponent({
       { label: '前100名', value: 'top100' }
     ]
 
-    // 計算顯示的幣種
-    const displayedCoins = computed(() => {
-      let filtered = coins.value
-
-      // 搜尋篩選
-      if (searchQuery.value) {
-        const query = searchQuery.value.toLowerCase()
-        filtered = filtered.filter(coin => 
-          coin.name.toLowerCase().includes(query) ||
-          coin.symbol.toLowerCase().includes(query)
-        )
-      }
-
-      // 排名篩選
-      if (currentFilter.value !== 'all') {
-        const limit = parseInt(currentFilter.value.replace('top', ''))
-        filtered = filtered.filter(coin => coin.rank && coin.rank <= limit)
-      }
-
-      return filtered.slice(0, page.value * pageSize)
-    })
+    // 使用store的getters
+    const displayedCoins = computed(() => coinStore.displayedCoins)
+    const loading = computed(() => coinStore.loading)
+    const hasMore = computed(() => coinStore.hasMore)
+    const searchQuery = computed(() => coinStore.searchQuery)
+    const currentFilter = computed(() => coinStore.filter)
 
     // 格式化價格
     const formatPrice = (price: number) => {
@@ -194,23 +173,17 @@ export default defineComponent({
 
     // 搜尋處理
     const handleSearch = () => {
-      page.value = 1
+      coinStore.setSearchQuery(searchQuery.value)
     }
 
     // 設定篩選
     const setFilter = (filter: string) => {
-      currentFilter.value = filter
-      page.value = 1
+      coinStore.setFilter(filter)
     }
 
     // 載入更多
     const loadMore = async () => {
-      if (loadingMore.value) return
-      
-      loadingMore.value = true
-      await new Promise(resolve => setTimeout(resolve, 500)) // 模擬載入延遲
-      page.value++
-      loadingMore.value = false
+      await coinStore.loadMore()
     }
 
     // 前往幣種詳情
