@@ -15,10 +15,12 @@
         <div class="title-container">
           <h1 class="page-title cyberpunk-text">
             <span class="glitch-text" data-text="市場概覽">市場概覽</span>
+            <span class="japanese-text">マーケット</span>
           </h1>
           <div class="title-underline"></div>
         </div>
         <p class="page-subtitle neon-text">{{ t('page.marketOverviewSubtitle') }}</p>
+        <div class="cyber-city-silhouette"></div>
       </div>
 
       <!-- 載入狀態 -->
@@ -40,6 +42,7 @@
         <div class="key-metrics">
           <div class="metric-card primary cyber-card">
             <div class="card-glow"></div>
+            <div class="card-crack"></div>
             <div class="metric-icon neon-icon">💰</div>
             <div class="metric-content">
               <h3 class="metric-label cyber-label">{{ t('market.totalMarketCap') }}</h3>
@@ -53,6 +56,7 @@
 
           <div class="metric-card cyber-card">
             <div class="card-glow"></div>
+            <div class="card-crack"></div>
             <div class="metric-icon neon-icon">📈</div>
             <div class="metric-content">
               <h3 class="metric-label cyber-label">{{ t('market.volume24h') }}</h3>
@@ -66,6 +70,7 @@
 
           <div class="metric-card cyber-card">
             <div class="card-glow"></div>
+            <div class="card-crack"></div>
             <div class="metric-icon neon-icon">₿</div>
             <div class="metric-content">
               <h3 class="metric-label cyber-label">{{ t('market.bitcoinDominance') }}</h3>
@@ -76,6 +81,7 @@
 
           <div class="metric-card cyber-card">
             <div class="card-glow"></div>
+            <div class="card-crack"></div>
             <div class="metric-icon neon-icon">🪙</div>
             <div class="metric-content">
               <h3 class="metric-label cyber-label">{{ t('market.activeCoins') }}</h3>
@@ -428,26 +434,44 @@ export default defineComponent({
 .page-title {
   font-size: 2.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  background: linear-gradient(135deg, #ff006e, #8338ec);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: var(--spacing-sm);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .glitch-text {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   color: transparent;
   white-space: pre;
   font-size: 2.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  background: linear-gradient(135deg, #ff006e, #8338ec);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: glitch 0.5s infinite;
+  text-shadow: 
+    2px 0 #ff006e,
+    -2px 0 #8338ec,
+    0 2px #ff006e,
+    0 -2px #8338ec;
+}
+
+.japanese-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #ff006e, #3a86ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: neonPulse 2s ease-in-out infinite alternate;
+  text-shadow: 
+    0 0 5px #ff006e,
+    0 0 10px #ff006e,
+    0 0 15px #ff006e;
 }
 
 @keyframes glitch {
@@ -471,6 +495,90 @@ export default defineComponent({
   }
 }
 
+@keyframes neonPulse {
+  0% {
+    text-shadow: 
+      0 0 5px #ff006e,
+      0 0 10px #ff006e,
+      0 0 15px #ff006e;
+  }
+  100% {
+    text-shadow: 
+      0 0 10px #ff006e,
+      0 0 20px #ff006e,
+      0 0 30px #ff006e;
+  }
+}
+
+@keyframes underlineGlow {
+  0% {
+    box-shadow: 0 0 5px #ff006e;
+  }
+  100% {
+    box-shadow: 0 0 15px #ff006e, 0 0 25px #8338ec;
+  }
+}
+
+@keyframes cityFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes crackFlash {
+  0%, 90% {
+    opacity: 0;
+  }
+  95% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes borderGlow {
+  0% {
+    box-shadow: 0 0 5px #ff006e;
+  }
+  100% {
+    box-shadow: 0 0 15px #ff006e, 0 0 25px #8338ec;
+  }
+}
+
+@keyframes iconPulse {
+  0% {
+    text-shadow:
+      0 0 5px #ff006e,
+      0 0 10px #ff006e,
+      0 0 15px #ff006e;
+  }
+  100% {
+    text-shadow:
+      0 0 10px #ff006e,
+      0 0 20px #ff006e,
+      0 0 30px #ff006e;
+  }
+}
+
+@keyframes valueGlow {
+  0% {
+    text-shadow:
+      0 0 5px #ff006e,
+      0 0 10px #ff006e,
+      0 0 15px #ff006e;
+  }
+  100% {
+    text-shadow:
+      0 0 10px #ff006e,
+      0 0 20px #ff006e,
+      0 0 30px #ff006e;
+  }
+}
+
 .title-underline {
   position: absolute;
   bottom: -5px;
@@ -478,9 +586,24 @@ export default defineComponent({
   transform: translateX(-50%);
   width: 100px;
   height: 3px;
-  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+  background: linear-gradient(90deg, #ff006e, #8338ec);
   border-radius: var(--radius-sm);
-  opacity: 0.5;
+  opacity: 0.8;
+  animation: underlineGlow 2s ease-in-out infinite alternate;
+}
+
+.cyber-city-silhouette {
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 100"><defs><linearGradient id="cityGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:%23ff006e;stop-opacity:0.3"/><stop offset="50%" style="stop-color:%233a86ff;stop-opacity:0.3"/><stop offset="100%" style="stop-color:%23ff006e;stop-opacity:0.3"/></linearGradient></defs><path d="M0,100 L0,80 L50,60 L100,70 L150,40 L200,50 L250,30 L300,45 L350,25 L400,35 L450,20 L500,30 L550,15 L600,25 L650,10 L700,20 L750,5 L800,15 L850,8 L900,12 L950,3 L1000,8 L1050,2 L1100,5 L1150,1 L1200,3 L1200,100 Z" fill="url(%23cityGrad)"/></svg>');
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.6;
+  animation: cityFloat 8s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .page-subtitle {
@@ -731,6 +854,22 @@ export default defineComponent({
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  background: linear-gradient(135deg, rgba(255, 0, 110, 0.1), rgba(131, 56, 236, 0.1));
+}
+
+.card-crack {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(45deg, transparent 40%, rgba(255, 0, 110, 0.3) 40%, rgba(255, 0, 110, 0.3) 60%, transparent 60%),
+    linear-gradient(-45deg, transparent 40%, rgba(58, 134, 255, 0.3) 40%, rgba(58, 134, 255, 0.3) 60%, transparent 60%);
+  background-size: 20px 20px;
+  opacity: 0;
+  animation: crackFlash 3s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .cyber-card::before {
@@ -740,9 +879,10 @@ export default defineComponent({
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+  background: linear-gradient(90deg, #ff006e, #8338ec);
   transform: scaleX(0);
   transition: transform 0.3s ease;
+  animation: borderGlow 2s ease-in-out infinite alternate;
 }
 
 .cyber-card.primary::before {
@@ -786,15 +926,16 @@ export default defineComponent({
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(45deg, var(--primary-color), var(--primary-light));
+  background: linear-gradient(45deg, #ff006e, #3a86ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   border-radius: var(--radius-lg);
   flex-shrink: 0;
   text-shadow:
-    0 0 5px var(--primary-color),
-    0 0 10px var(--primary-color),
-    0 0 15px var(--primary-color);
+    0 0 5px #ff006e,
+    0 0 10px #ff006e,
+    0 0 15px #ff006e;
+  animation: iconPulse 2s ease-in-out infinite alternate;
 }
 
 .metric-content {
@@ -823,9 +964,10 @@ export default defineComponent({
 
 .cyber-value.neon-text {
   text-shadow:
-    0 0 5px var(--primary-color),
-    0 0 10px var(--primary-color),
-    0 0 15px var(--primary-color);
+    0 0 5px #ff006e,
+    0 0 10px #ff006e,
+    0 0 15px #ff006e;
+  animation: valueGlow 2s ease-in-out infinite alternate;
 }
 
 .metric-change.positive {
@@ -1281,10 +1423,22 @@ export default defineComponent({
 @media (max-width: 768px) {
   .page-title {
     font-size: 2rem;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .japanese-text {
+    font-size: 1.2rem;
+  }
+
+  .cyber-city-silhouette {
+    height: 60px;
+    bottom: -30px;
   }
 
   .key-metrics {
     grid-template-columns: 1fr;
+    gap: var(--spacing-md);
   }
 
   .details-header {
@@ -1313,6 +1467,49 @@ export default defineComponent({
 
   .metric-value {
     font-size: 1.25rem;
+  }
+
+  .cyber-card {
+    padding: var(--spacing-md);
+  }
+
+  .neon-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .japanese-text {
+    font-size: 1rem;
+  }
+
+  .cyber-city-silhouette {
+    height: 40px;
+    bottom: -20px;
+  }
+
+  .metric-card {
+    padding: var(--spacing-sm);
+  }
+
+  .cyber-card {
+    padding: var(--spacing-sm);
+  }
+
+  .neon-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .metric-value {
+    font-size: 1rem;
   }
 }
 </style>
