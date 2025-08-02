@@ -1,22 +1,36 @@
 <template>
   <div class="coins-page">
+    <!-- 背景動畫效果 -->
+    <div class="cyberpunk-bg">
+      <div class="grid-overlay"></div>
+      <div class="scan-lines"></div>
+      <div class="glitch-overlay"></div>
+    </div>
+    
     <NavbarItem />
     <div class="container">
       <!-- 頁面標題 -->
       <div class="page-header">
-        <h1 class="page-title">{{ t('page.coinList') }}</h1>
-        <p class="page-subtitle">{{ t('page.coinListSubtitle') }}</p>
+        <div class="title-container">
+          <h1 class="page-title cyberpunk-text">
+            <span class="glitch-text" data-text="幣種列表">幣種列表</span>
+            <span class="japanese-text">コイン</span>
+          </h1>
+          <div class="title-underline"></div>
+        </div>
+        <p class="page-subtitle neon-text">{{ t('page.coinListSubtitle') }}</p>
+        <div class="cyber-city-silhouette"></div>
       </div>
 
       <!-- 搜尋和篩選 -->
       <div class="search-section">
-        <div class="search-box">
-          <span class="search-icon">🔍</span>
+        <div class="search-box cyber-search">
+          <span class="search-icon neon-icon">🔍</span>
           <input
             v-model="searchQuery"
             type="text"
             :placeholder="t('coins.searchPlaceholder')"
-            class="search-input"
+            class="search-input cyber-input"
             @input="
               (event) => coinStore.setSearchQuery((event.target as HTMLInputElement)?.value || '')
             "
@@ -28,7 +42,7 @@
             v-for="filter in filters"
             :key="filter.value"
             @click="setFilter(filter.value)"
-            :class="['filter-btn', { active: currentFilter === filter.value }]"
+            :class="['filter-btn cyber-btn', { active: currentFilter === filter.value }]"
           >
             {{ filter.label }}
           </button>
@@ -37,8 +51,12 @@
 
       <!-- 載入狀態 -->
       <div v-if="loading && !displayedCoins.length" class="loading-section">
-        <div class="loading-spinner"></div>
-        <p>{{ t('coins.loading') }}</p>
+        <div class="cyberpunk-spinner">
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring"></div>
+        </div>
+        <p class="loading-text">{{ t('coins.loading') }}</p>
       </div>
 
       <!-- 幣種網格 -->
@@ -46,28 +64,30 @@
         <div
           v-for="coin in displayedCoins"
           :key="coin.id"
-          class="coin-card"
+          class="coin-card cyber-card"
           @click="goToCoinDetail(coin.id)"
         >
+          <div class="card-glow"></div>
+          <div class="card-crack"></div>
           <div class="coin-header">
-            <div class="coin-icon">
+            <div class="coin-icon neon-icon">
               {{ getCoinIcon(coin.symbol) }}
             </div>
             <div class="coin-info">
-              <h3 class="coin-name">{{ coin.name }}</h3>
-              <p class="coin-symbol">{{ coin.symbol.toUpperCase() }}</p>
+              <h3 class="coin-name cyber-name">{{ coin.name }}</h3>
+              <p class="coin-symbol cyber-symbol">{{ coin.symbol.toUpperCase() }}</p>
             </div>
-            <div class="coin-rank" v-if="coin.rank">#{{ coin.rank }}</div>
+            <div class="coin-rank cyber-rank" v-if="coin.rank">#{{ coin.rank }}</div>
           </div>
 
           <div class="coin-details" v-if="coin.price">
             <div class="price-info">
-              <span class="price-label">{{ t('coins.price') }}</span>
-              <span class="price-value">${{ formatPrice(coin.price) }}</span>
+              <span class="price-label cyber-label">{{ t('coins.price') }}</span>
+              <span class="price-value cyber-value">${{ formatPrice(coin.price) }}</span>
             </div>
             <div class="change-info" :class="getChangeClass(coin.change_24h)">
-              <span class="change-label">{{ t('coins.change24h') }}</span>
-              <span class="change-value">{{ formatChange(coin.change_24h) }}</span>
+              <span class="change-label cyber-label">{{ t('coins.change24h') }}</span>
+              <span class="change-value cyber-change-value">{{ formatChange(coin.change_24h) }}</span>
             </div>
           </div>
 
@@ -80,16 +100,17 @@
 
       <!-- 載入更多按鈕 -->
       <div v-if="hasMore && !loading" class="load-more-section">
-        <button @click="loadMore" class="btn btn-primary load-more-btn">
-          <span>{{ t('coins.loadMore') }}</span>
+        <button @click="loadMore" class="cyber-button load-more-btn">
+          <span class="button-text">{{ t('coins.loadMore') }}</span>
+          <div class="button-glow"></div>
         </button>
       </div>
 
       <!-- 無結果 -->
-      <div v-if="!loading && !displayedCoins.length" class="no-results">
-        <div class="no-results-icon">🔍</div>
-        <h3>{{ t('coins.noResults') }}</h3>
-        <p>{{ t('coins.noResultsMessage') }}</p>
+      <div v-if="!loading && !displayedCoins.length" class="no-results cyber-error">
+        <div class="no-results-icon cyber-error-icon">🔍</div>
+        <h3 class="cyber-error-title">{{ t('coins.noResults') }}</h3>
+        <p class="cyber-error-text">{{ t('coins.noResultsMessage') }}</p>
       </div>
     </div>
     <AppFooter />
