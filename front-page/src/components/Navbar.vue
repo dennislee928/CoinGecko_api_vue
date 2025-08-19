@@ -1,77 +1,244 @@
 <template>
   <nav class="navbar">
     <div class="navbar-container">
-      <router-link to="/" class="navbar-logo">Crypto Info App</router-link>
-      <ul class="navbar-menu">
-        <li><router-link to="/">Home</router-link></li>
-        <li><router-link to="/coins">Coins</router-link></li>
-        <!-- 其他導航項目 -->
-      </ul>
+      <router-link to="/" class="navbar-logo">
+        <div class="logo-icon">₿</div>
+        <span>Crypto Tracker</span>
+      </router-link>
+
+      <div class="navbar-menu">
+        <router-link to="/" class="nav-link" active-class="active">
+          <span class="nav-icon">📊</span>
+          <span class="nav-text">{{ t('nav.marketOverview') }}</span>
+        </router-link>
+        <router-link to="/coins" class="nav-link" active-class="active">
+          <span class="nav-icon">🪙</span>
+          <span class="nav-text">{{ t('nav.coinList') }}</span>
+        </router-link>
+        <LanguageSelector />
+      </div>
+
+      <div class="navbar-mobile-toggle" @click="toggleMobileMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <!-- 行動版選單 -->
+    <div class="mobile-menu" :class="{ active: isMobileMenuOpen }">
+      <router-link to="/" class="mobile-nav-link" @click="closeMobileMenu">
+        <span class="nav-icon">📊</span>
+        <span>{{ t('nav.marketOverview') }}</span>
+      </router-link>
+      <router-link to="/coins" class="mobile-nav-link" @click="closeMobileMenu">
+        <span class="nav-icon">🪙</span>
+        <span>{{ t('nav.coinList') }}</span>
+      </router-link>
+      <div class="mobile-language-selector">
+        <LanguageSelector />
+      </div>
     </div>
   </nav>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import LanguageSelector from './LanguageSelector.vue'
 
 export default defineComponent({
-  name: 'NavbarItem'
+  name: 'NavbarItem',
+  components: {
+    LanguageSelector
+  },
+  setup() {
+    const { t } = useI18n()
+    const isMobileMenuOpen = ref(false)
+
+    const toggleMobileMenu = () => {
+      isMobileMenuOpen.value = !isMobileMenuOpen.value
+    }
+
+    const closeMobileMenu = () => {
+      isMobileMenuOpen.value = false
+    }
+
+    return {
+      t,
+      isMobileMenuOpen,
+      toggleMobileMenu,
+      closeMobileMenu
+    }
+  }
 })
 </script>
 
 <style scoped>
 .navbar {
-  width: 100%; /* 確保導航欄寬度為 100% */
-  background-color: #4caf50; /* 深色背景 */
-  color: white; /* 白色文字 */
+  background: rgba(30, 41, 59, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
 }
 
 .navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
   display: flex;
-  justify-content: space-between; /* 使項目兩端對齊 */
   align-items: center;
-  padding: 10px 20px; /* 調整內邊距 */
+  justify-content: space-between;
+  height: 70px;
 }
 
 .navbar-logo {
-  font-size: 24px;
-  color: white;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
   text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.navbar-logo:hover {
+  color: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+.logo-icon {
+  font-size: 1.5rem;
+  color: var(--primary-color);
 }
 
 .navbar-menu {
-  list-style: none;
   display: flex;
-  margin: 0;
-  padding: 0;
+  gap: var(--spacing-lg);
 }
 
-.navbar-menu li {
-  margin-left: 20px; /* 項目之間的間距 */
-}
-
-.navbar-menu a {
-  color: white; /* 白色文字 */
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
   text-decoration: none;
+  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-.navbar-menu a:hover {
-  text-decoration: underline; /* 懸停時的下劃線 */
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-primary);
+  background: rgba(99, 102, 241, 0.1);
+  transform: translateY(-1px);
 }
 
-@media (max-width: 600px) {
-  .navbar-container {
-    flex-direction: column; /* 在小屏幕上垂直排列 */
-    align-items: flex-start; /* 左對齊 */
-  }
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 2px;
+  background: var(--primary-color);
+  border-radius: 1px;
+}
 
+.nav-icon {
+  font-size: 1.1rem;
+}
+
+.nav-text {
+  font-weight: 500;
+}
+
+.navbar-mobile-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  padding: var(--spacing-sm);
+}
+
+.navbar-mobile-toggle span {
+  width: 25px;
+  height: 3px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu {
+  display: none;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  padding: var(--spacing-md);
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  text-decoration: none;
+  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+  margin-bottom: var(--spacing-sm);
+}
+
+.mobile-nav-link:hover {
+  color: var(--text-primary);
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.mobile-language-selector {
+  padding: var(--spacing-md);
+  border-top: 1px solid var(--border-color);
+  margin-top: var(--spacing-sm);
+}
+
+@media (max-width: 768px) {
   .navbar-menu {
-    flex-direction: column; /* 將導航項目垂直排列 */
-    width: 100%; /* 確保導航項目寬度為 100% */
+    display: none;
   }
 
-  .navbar-menu li {
-    margin: 5px 0; /* 項目之間的間距 */
+  .navbar-mobile-toggle {
+    display: flex;
+  }
+
+  .mobile-menu {
+    display: block;
+  }
+
+  .navbar-logo span {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-container {
+    padding: 0 var(--spacing-sm);
+  }
+
+  .navbar-logo {
+    font-size: 1.1rem;
   }
 }
 </style>
