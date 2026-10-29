@@ -43,6 +43,7 @@
   },
   "overrides": {
     "form-data": "^4.0.6",
-    "shell-quote": "^1.9.0"
+    "shell-quote": "^1.9.0",
+    "tinypool": "^2.1.2"
   }
 }
