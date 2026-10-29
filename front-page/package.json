@@ -47,6 +47,7 @@
     "tinypool": "^2.1.2",
     "browserslist": "^4.28.7",
     "rollup": "^4.59.0",
-    "@babel/helpers": "^7.26.10"
+    "@babel/helpers": "^7.26.10",
+    "@babel/core": "^7.29.6"
   }
 }
